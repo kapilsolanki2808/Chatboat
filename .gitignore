@@ -17,6 +17,7 @@ env/
 venv/
 ENV/
 .env
+chat_boat_env
 
 # Django
 *.log
