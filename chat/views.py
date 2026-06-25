@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .ai_service import get_ai_response
+from .models import ChatMessage
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ def chat_view(request):
             {"error": "Chat service is temporarily unavailable. Please try again later."},
             status=500,
         )
+    ChatMessage.objects.create(user_message=user_message, bot_response=response)
     logger.info("Chat request processed successfully.")
     return Response({
         "user": user_message,
